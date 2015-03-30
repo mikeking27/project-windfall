@@ -13,6 +13,9 @@ public class UserControl : MonoBehaviour {
 	private bool crouched = false;
 	private float h;
 	private float v;
+
+	public Object grenade;
+	private float grenadeTimer = 0f;
 	
 	public int playerNumber = 0;
 	
@@ -40,10 +43,20 @@ public class UserControl : MonoBehaviour {
 		    Debug.Log ("Y");
 		if (Input.GetButtonDown ("L"+(playerNumber+1)))
 			Debug.Log ("L");
-		if (Input.GetButtonDown ("R"+(playerNumber+1)))
-			Debug.Log ("R");
-		if (Input.GetButtonDown ("Z"+(playerNumber+1)))
-			Debug.Log ("Z");
+		if (Input.GetButtonDown ("R" + (playerNumber + 1))) {
+			if (grenadeTimer < Time.time) {
+				grenadeTimer = Time.time + 5f;
+				var nade = Instantiate(grenade, transform.FindChild("SpawnPoint").position, Quaternion.identity) as GameObject;
+				nade.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
+			}
+		}
+		if (Input.GetButtonDown ("Z" + (playerNumber + 1))) {
+			if (grenadeTimer < Time.time) {
+				grenadeTimer = Time.time + 5f;
+				var nade = Instantiate(grenade, transform.FindChild("SpawnPoint").position, Quaternion.identity) as GameObject;
+				nade.GetComponent<Rigidbody>().AddForce(transform.forward * 100f);
+			}
+		}
 
 		if (Input.GetButtonDown ("start"+(playerNumber+1)))
 			Debug.Log ("start");
