@@ -63,8 +63,8 @@ public class UserControl : MonoBehaviour {
 	// Fixed update is called in sync with physics
 	void FixedUpdate()
 	{
-		h = Input.GetAxis ("leftX"+(playerNumber+1)) * 2f;
-		v = Input.GetAxis ("leftY"+(playerNumber+1)) * 2f;
+		h = Input.GetAxis ("leftX"+(playerNumber+1));
+		v = Input.GetAxis ("leftY"+(playerNumber+1));
 		// calculate move direction to pass to character
 		if (m_Cam != null)
 		{
